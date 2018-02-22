@@ -29,10 +29,15 @@ Core Animation is a graphics rendering and animation infrastructure available on
 * OS | **OSX High Sierra**
 		
 ## UI sketch
+![GitHub Logo](/Assets/User Interface.png)
+
+![GitHub Logo](/Assets/test app.png)
+
+![GitHub Logo](/Assets/View Transisitions.png)
 	
 ## Design structure/ architecture
 We will be using the default architecture model as a basis for our application
-		 
+![GitHub Logo](/Assets/Architecture.png)		 
 ### Detailed design
 1. Algorithim 
 			NA
