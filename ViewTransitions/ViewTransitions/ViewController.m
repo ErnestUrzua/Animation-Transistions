@@ -52,15 +52,19 @@
 @property (nonatomic, strong) IBOutlet UIImageView *frontView;
 @property (nonatomic, strong) IBOutlet UIImageView *backView;
 
+//Create the buttons to be used by the application
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *fadeButton;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *flipButton;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *bounceButton;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *curlUpButton;
 
+//an array to hold the animation properties
 @property (nonatomic, strong) NSArray *priorConstraints;
 
 - (IBAction)flipAction:(id)sender;
 - (IBAction)fadeAction:(id)sender;
 - (IBAction)bounceAction:(id)sender;
+- (IBAction)curlUpAction:(id)sender;
 
 @end
 
@@ -96,7 +100,7 @@
 {
     [super viewDidLoad];
 	
-    // start off by using the front view (Palm trees)
+    // start off by using the front view (Apple Deep Space photo)
     [self.view addSubview:self.frontView];
     
     // since frontView has no constraints set to match it's superview, we set them here
@@ -106,10 +110,11 @@
     // note: the bounce button only shows for iOS 7.0 or later
     //
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    NSMutableArray *toolbarButtons = [NSMutableArray arrayWithObjects:flexItem, self.fadeButton, self.flipButton, nil];
+    NSMutableArray *toolbarButtons = [NSMutableArray arrayWithObjects:flexItem, self.fadeButton, self.flipButton,self.curlUpButton, nil];
 
     if ([[UIView class] respondsToSelector:
-         @selector(animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:)])
+         @selector(animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:
+                   animations:completion:)])	
     {
         [toolbarButtons addObject:self.bounceButton];
     }
@@ -136,7 +141,7 @@
     NSArray *priorConstraints = self.priorConstraints;
     [UIView transitionFromView:fromView
                         toView:toView
-                      duration:1.0
+                      duration:.75
                        options:options
                     completion:^(BOOL finished) {
                         // animation completed
@@ -154,6 +159,11 @@
 - (IBAction)fadeAction:(id)sender
 {
     [self performTransition:UIViewAnimationOptionTransitionCrossDissolve];
+}
+
+- (IBAction)curlUpAction:(id)sender
+{
+    [self performTransition:UIViewAnimationOptionTransitionCurlUp];
 }
 
 - (IBAction)flipAction:(id)sender
@@ -199,7 +209,7 @@
         [UIView animateWithDuration:1.0f
                               delay:0.0
              usingSpringWithDamping:0.5
-              initialSpringVelocity:5.0
+              initialSpringVelocity:15.0  //added 10 to initial 5 and this feels much better
                             options:0
                          animations:^{ toView.frame = endFrame; }
                          completion:^(BOOL finished) {

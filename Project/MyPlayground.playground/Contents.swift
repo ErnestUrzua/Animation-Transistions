@@ -6,7 +6,7 @@ import PlaygroundSupport
 class MyViewController : UIViewController {
     override func loadView() {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .gray
 
         let label = UILabel()
         label.frame = CGRect(x: 150, y: 200, width: 200, height: 20)
